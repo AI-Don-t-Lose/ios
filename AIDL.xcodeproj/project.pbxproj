@@ -35,6 +35,7 @@
 				DA24228F2E745722007D3A00 /* AIDL */,
 				DA24228E2E745722007D3A00 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		DA24228E2E745722007D3A00 /* Products */ = {

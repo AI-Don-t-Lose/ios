@@ -12,3 +12,6 @@
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+
+# sweetpad
+buildServer.json
