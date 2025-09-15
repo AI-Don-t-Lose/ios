@@ -16,7 +16,7 @@ struct GlassModifier: ViewModifier {
         ZStack {
           LinearGradient(
             colors: [
-              Color.black.opacity(0.02),
+              Color.black.opacity(0.007),
               Color.clear,
             ],
             startPoint: .topLeading,
@@ -26,7 +26,7 @@ struct GlassModifier: ViewModifier {
 
           RadialGradient(
             colors: [
-              Color.black.opacity(0.025),
+              Color.black.opacity(0.015),
               Color.clear,
             ],
             center: .center,
@@ -42,7 +42,11 @@ struct GlassModifier: ViewModifier {
             )
         }
       )
-      .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 12)
+      .background(
+        RoundedRectangle(cornerRadius: cornerRadius)
+          .fill(Color.white)
+          .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 12)
+      )
   }
 }
 
