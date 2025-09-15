@@ -16,27 +16,33 @@ struct GlassModifier: ViewModifier {
         ZStack {
           LinearGradient(
             colors: [
-              Color.black.opacity(0.08),
-              Color.black.opacity(0.05),
+              Color.black.opacity(0.02),
               Color.clear,
             ],
-            startPoint: .top,
-            endPoint: .bottom
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
           )
+          .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+
+          RadialGradient(
+            colors: [
+              Color.black.opacity(0.025),
+              Color.clear,
+            ],
+            center: .center,
+            startRadius: 30,
+            endRadius: 0
+          )
+          .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+
           RoundedRectangle(cornerRadius: cornerRadius)
             .stroke(
-              LinearGradient(
-                colors: [
-                  Color.black.opacity(0.2),
-                  Color.black.opacity(0.07),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-              ),
-              lineWidth: 1,
+              Color.white.opacity(0.8),
+              lineWidth: 1.7,
             )
         }
       )
+      .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 12)
   }
 }
 
