@@ -31,14 +31,14 @@ struct StockDetailView: View {
 
   var body: some View {
     ScrollView {
-      VStack(alignment: .leading, spacing: 20) {
+      VStack(alignment: .leading, spacing: 10) {
         // 종목명
         Text(stockInfo.name)
           .font(.title2)
           .fontWeight(.bold)
           .padding(.horizontal, 20)
 
-        VStack {
+        VStack(spacing: 10) {
           // 주식 가격 정보
           StockPriceView(stockInfo: stockInfo)
           // 소비 생활 매칭 점수
@@ -58,7 +58,7 @@ struct StockDetailView: View {
       }
       .padding(.top, 20)
     }
-    .background(Color(.systemBackground))
+    .background(Color.white)
   }
 }
 
