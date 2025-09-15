@@ -11,7 +11,7 @@ import SwiftUI
 struct AIDLApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      MyContentView()
     }
   }
 }

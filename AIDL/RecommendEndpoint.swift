@@ -1,10 +1,3 @@
-//
-//  RecommendEndpoint.swift
-//  AIDL
-//
-//  Created by Assistant on 9/16/25.
-//
-
 import Foundation
 
 struct RecommendEndpoint: HTTPEndpoint {
