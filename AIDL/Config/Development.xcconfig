@@ -1,0 +1,17 @@
+//
+//  Debug.xcconfig
+//  AIDL
+//
+//  Created by Jinyoung Kim on 9/16/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+// Development Configuration
+
+// Base URL for development environment
+BASE_URL = aidl-632242327735.asia-northeast3.run.app
+
+// API Token for development
+API_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXItMDAxIiwiaWF0IjoxMjM0NTY3ODkwfQ.Dr7HTHGJDdYuuJ7U6fuNrkCDbj19wBm67vsD_GczP70

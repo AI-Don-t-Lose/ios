@@ -12,9 +12,6 @@ struct AIDLApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .task {
-          await TestNetwork.testRequest()
-        }
     }
   }
 }

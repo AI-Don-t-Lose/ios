@@ -13,15 +13,13 @@ struct TestEndpoint: HTTPEndpoint {
     let date = "20250916"
   }
 
-  let url: URL = .init(string: "https://example.com")!
+  let url: URL = .init(string: "\(Environment.baseURL)/test")!
   let method: HTTPMethod = .get
   var headers: Header? {
-    let token = "token"
-    return ["Authorization": "Bearer \(token)"]
+    return ["Authorization": "Bearer \(Environment.apiToken)"]
   }
+
   let query: Query? = .init()
   let body: Data? = nil
-
-  init() {}
 }
 ```

@@ -10,9 +10,22 @@
 		DA24228D2E745722007D3A00 /* AIDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DA1169BF2E7964F300A742F9 /* Exceptions for "AIDL" folder in "AIDL" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DA24228C2E745722007D3A00 /* AIDL */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DA24228F2E745722007D3A00 /* AIDL */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DA1169BF2E7964F300A742F9 /* Exceptions for "AIDL" folder in "AIDL" target */,
+			);
 			path = AIDL;
 			sourceTree = "<group>";
 		};
@@ -126,8 +139,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		DA2422962E745723007D3A00 /* Debug */ = {
+		DA2422962E745723007D3A00 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = DA24228F2E745722007D3A00 /* AIDL */;
+			baseConfigurationReferenceRelativePath = Config/Debug.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -187,10 +202,12 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Development;
 		};
 		DA2422972E745723007D3A00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = DA24228F2E745722007D3A00 /* AIDL */;
+			baseConfigurationReferenceRelativePath = Config/Release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -245,8 +262,10 @@
 			};
 			name = Release;
 		};
-		DA2422992E745723007D3A00 /* Debug */ = {
+		DA2422992E745723007D3A00 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = DA24228F2E745722007D3A00 /* AIDL */;
+			baseConfigurationReferenceRelativePath = Config/Development.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -254,6 +273,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AIDL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -270,10 +290,12 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Development;
 		};
 		DA24229A2E745723007D3A00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = DA24228F2E745722007D3A00 /* AIDL */;
+			baseConfigurationReferenceRelativePath = Config/Release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -281,6 +303,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AIDL/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -305,7 +328,7 @@
 		DA2422882E745722007D3A00 /* Build configuration list for PBXProject "AIDL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA2422962E745723007D3A00 /* Debug */,
+				DA2422962E745723007D3A00 /* Development */,
 				DA2422972E745723007D3A00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -314,7 +337,7 @@
 		DA2422982E745723007D3A00 /* Build configuration list for PBXNativeTarget "AIDL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA2422992E745723007D3A00 /* Debug */,
+				DA2422992E745723007D3A00 /* Development */,
 				DA24229A2E745723007D3A00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
