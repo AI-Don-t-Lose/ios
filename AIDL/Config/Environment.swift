@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Environment {
+enum Environment {
   // MARK: - Keys
 
   enum Keys {
