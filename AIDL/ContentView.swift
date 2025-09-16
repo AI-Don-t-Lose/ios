@@ -8,33 +8,10 @@
 import SwiftUI
 import Charts
 
-struct Stock {
-    let name: String
-    let previousPrice: Double
-    let currentPrice: Double
-}
-
-struct ExpenseCategory {
-    let name: String
-    let percentage: Double
-    let color: Color
-}
-
 struct ContentView: View {
     let userName = "000"
     
-    let stocks = [
-        Stock(name: "추천 종목 1", previousPrice: 520, currentPrice: 17350),
-        Stock(name: "추천 종목 2", previousPrice: -490, currentPrice: 12300),
-        Stock(name: "추천 종목 3", previousPrice: 1860, currentPrice: 40653)
-    ]
-    
-    let expenseData = [
-        ExpenseCategory(name: "현대 주유소", percentage: 40, color: .blue),
-        ExpenseCategory(name: "Key title goes here", percentage: 30, color: .purple),
-        ExpenseCategory(name: "Key title goes here", percentage: 20, color: .orange),
-        ExpenseCategory(name: "Key title goes here", percentage: 10, color: .green)
-    ]
+    @StateObject private var viewModel = ContentViewModel()
     
     var body: some View {
         ScrollView {
@@ -64,9 +41,9 @@ struct ContentView: View {
                     }
                     
                     VStack(spacing: 10) {
-                        ForEach(stocks.indices, id: \.self) { index in
+                        ForEach(viewModel.stocks.indices, id: \.self) { index in
                             HStack {
-                                Text(stocks[index].name)
+                                Text(viewModel.stocks[index].name)
                                     .font(.body)
                                     .foregroundColor(.secondary)
                                 
@@ -74,17 +51,22 @@ struct ContentView: View {
                                 
                                 HStack(spacing: 10) {
                                     HStack {
-                                        Image(systemName: stocks[index].previousPrice > 0 ? "triangle.fill" : "triangle.fill")
-                                            .rotationEffect(.degrees(stocks[index].previousPrice > 0 ? 0 : 180))
-                                            .foregroundColor(stocks[index].previousPrice > 0 ? .blue : .red)
-                                            .font(.caption)
+                                        if viewModel.stocks[index].previousPrice != 0 {
+                                            Image(systemName: "triangle.fill")
+                                                .rotationEffect(.degrees(viewModel.stocks[index].previousPrice > 0 ? 0 : 180))
+                                                .foregroundColor(viewModel.stocks[index].previousPrice > 0 ? .red : .blue)
+                                                .font(.caption)
+                                        }
                                         
-                                        Text(String(format: "%.0f", abs(stocks[index].previousPrice)))
+                                        Text(String(format: "%.0f", abs(viewModel.stocks[index].previousPrice)))
                                             .font(.body)
-                                            .foregroundColor(stocks[index].previousPrice > 0 ? .blue : .red)
+                                            .foregroundColor(
+                                                viewModel.stocks[index].previousPrice > 0 ? .red : 
+                                                viewModel.stocks[index].previousPrice < 0 ? .blue : .black
+                                            )
                                     }
                                     
-                                    Text(String(format: "%.0f", stocks[index].currentPrice))
+                                    Text(String(format: "%.0f", viewModel.stocks[index].currentPrice))
                                         .font(.body)
                                         .fontWeight(.semibold)
                                 }
@@ -110,15 +92,15 @@ struct ContentView: View {
 
                         VStack {
                             ZStack {
-                                let total = expenseData.reduce(0) { $0 + $1.percentage }
+                                let total = viewModel.expenseData.reduce(0) { $0 + $1.percentage }
                                 
-                                ForEach(expenseData.indices, id: \.self) { index in
-                                    let startAngle = expenseData.prefix(index).reduce(0) { $0 + $1.percentage } / total
-                                    let endAngle = expenseData.prefix(index + 1).reduce(0) { $0 + $1.percentage } / total
+                                ForEach(viewModel.expenseData.indices, id: \.self) { index in
+                                    let startAngle = viewModel.expenseData.prefix(index).reduce(0) { $0 + $1.percentage } / total
+                                    let endAngle = viewModel.expenseData.prefix(index + 1).reduce(0) { $0 + $1.percentage } / total
                                     
                                     Circle()
                                         .trim(from: startAngle, to: endAngle)
-                                        .stroke(expenseData[index].color, lineWidth: 25)
+                                        .stroke(viewModel.expenseData[index].color, lineWidth: 25)
                                         .frame(width: 150, height: 150)
                                         .rotationEffect(.degrees(-90))
                                 }
@@ -130,19 +112,19 @@ struct ContentView: View {
                             .padding(.bottom, 20)
                             
                             VStack(alignment: .leading, spacing: 8) {
-                                ForEach(expenseData.indices, id: \.self) { index in
+                                ForEach(viewModel.expenseData.indices, id: \.self) { index in
                                     HStack {
                                         Circle()
-                                            .fill(expenseData[index].color)
+                                            .fill(viewModel.expenseData[index].color)
                                             .frame(width: 12, height: 12)
                                         
-                                        Text(expenseData[index].name)
+                                        Text(viewModel.expenseData[index].name)
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                         
                                         Spacer()
                                         
-                                        Text("\(Int(expenseData[index].percentage))%")
+                                        Text("\(Int(viewModel.expenseData[index].percentage))%")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
@@ -155,9 +137,24 @@ struct ContentView: View {
             }
             .padding()
         }
+        .onAppear {
+            viewModel.loadData()
+        }
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.1))
+            }
+        }
+        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button("OK") {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+            }
+        }
     }
-}
-
-#Preview {
-    ContentView()
 }
