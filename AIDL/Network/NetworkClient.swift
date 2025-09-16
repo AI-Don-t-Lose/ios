@@ -17,6 +17,7 @@ class NetworkClient {
   func request<T: HTTPEndpoint>(_ endpoint: T) async throws -> (data: T.Response, response: URLResponse) {
     let request = getRequest(endpoint)
     let (data, response) = try await URLSession.shared.data(for: request)
+    printData(data)
     return try (JSONDecoder().decode(T.Response.self, from: data), response)
   }
 
@@ -40,6 +41,18 @@ class NetworkClient {
     return data
   }
 
+  private func printData(_ data: Data) {
+    print("👀 NetworkClient --start")
+    do {
+      if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+        print(dict)
+      }
+    } catch {
+      print("Failed to decode JSON:", error)
+    }
+    print("👀 NetworkClient --end")
+  }
+
   private func getRequest<T: HTTPEndpoint>(_ endpoint: T) -> URLRequest {
     let url = getCompleteURL(endpoint)
     var request = URLRequest(url: url)
@@ -51,6 +64,7 @@ class NetworkClient {
 
   private func getCompleteURL<T: HTTPEndpoint>(_ endpoint: T) -> URL {
     var url = endpoint.url
+    url.append(path: endpoint.path)
     let queryItems = asQueryItems(T.self, query: endpoint.query)
     url.append(queryItems: queryItems)
     return url

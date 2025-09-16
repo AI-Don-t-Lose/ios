@@ -15,7 +15,7 @@ struct AIDLApp: App {
 
 class TestNetwork {
   static func testRequest() async {
-    let endpoint = StatsEndpoint()
+    let endpoint = StockPriceEndpoint(stockName: "네이버")
     do {
       let response = try await NetworkClient().request(endpoint)
       print(response.data)

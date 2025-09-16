@@ -6,6 +6,7 @@ protocol HTTPEndpoint {
   associatedtype Response: Decodable
 
   var url: URL { get }
+  var path: String { get }
   var method: HTTPMethod { get }
   var headers: Header? { get }
   var query: Query? { get }
