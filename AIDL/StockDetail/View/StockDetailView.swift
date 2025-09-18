@@ -10,20 +10,17 @@ struct StockDetailView: View {
   }
 
   var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: 10) {
-        if viewModel.isLoading {
-          loadingView
-        } else if let stockInfo = viewModel.stockInfo,
-                  let consumerScore = viewModel.consumerScore,
-                  let aiBriefing = viewModel.aiBriefing
-        {
-          contentView(stockInfo: stockInfo, consumerScore: consumerScore, aiBriefing: aiBriefing)
-        } else {
-          dataIncompleteView
-        }
+    VStack {
+      if viewModel.isLoading {
+        loadingView
+      } else if let stockInfo = viewModel.stockInfo,
+                let consumerScore = viewModel.consumerScore,
+                let aiBriefing = viewModel.aiBriefing
+      {
+        contentView(stockInfo: stockInfo, consumerScore: consumerScore, aiBriefing: aiBriefing)
+      } else {
+        dataIncompleteView
       }
-      .padding(.top, 20)
     }
     .background(Color.white)
     .task {
@@ -47,13 +44,13 @@ struct StockDetailView: View {
         // 소비 생활 매칭 점수
         ConsumerScoreView(score: consumerScore)
       }
-      .padding()
+      .padding(.vertical)
       .glassEffect()
       .padding()
 
       // AI 종목 브리핑
       AIBriefingView(briefing: aiBriefing)
-        .padding()
+        .padding(.vertical)
         .glassEffect()
         .padding()
 
@@ -62,15 +59,8 @@ struct StockDetailView: View {
   }
 
   private var loadingView: some View {
-    VStack(spacing: 20) {
-      ProgressView()
-        .scaleEffect(1.5)
-      Text("데이터를 불러오는 중...")
-        .font(.body)
-        .foregroundColor(.secondary)
-    }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.top, 100)
+    ProgressView()
+      .scaleEffect(1.5)
   }
 
   private var dataIncompleteView: some View {
@@ -94,9 +84,9 @@ struct StockDetailView: View {
         }
       }
       .buttonStyle(.borderedProminent)
+      .tint(.black)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .padding(.top, 100)
   }
 }
 

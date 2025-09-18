@@ -46,12 +46,12 @@ struct NewsListView: View {
     NewsItem(
       link: "https://example.com/news1",
       summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
-      date: "2025.08.28 Yahoo News"
+      date: "2025-09-17T00:00:00.000Z"
     ),
     NewsItem(
       link: "https://example.com/news2",
       summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
-      date: "2025.08.27 Y News"
+      date: "2025-09-16T00:00:00.000Z"
     ),
   ])
 }

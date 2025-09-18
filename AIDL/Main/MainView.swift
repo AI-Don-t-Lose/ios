@@ -14,34 +14,63 @@ struct MainView: View {
   @StateObject private var viewModel = MainViewModel()
 
   var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: 30) {
-        VStack(alignment: .leading, spacing: 10) {
-          HStack {
-            VStack(alignment: .leading) {
-              Text("안녕하세요")
-                .font(.title2)
-                .fontWeight(.bold)
-              Text("\(userName)님!")
-                .font(.title2)
-                .fontWeight(.bold)
-            }
-
-            Spacer()
+    NavigationStack {
+      VStack {
+        if viewModel.isLoading {
+          loadingView
+        } else {
+          ScrollView {
+            contentView
           }
         }
+      }
+      .onAppear {
+        viewModel.loadData()
+      }
+      .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+        Button("OK") {
+          viewModel.errorMessage = nil
+        }
+      } message: {
+        if let errorMessage = viewModel.errorMessage {
+          Text(errorMessage)
+        }
+      }
+    }
+    .tint(.black)
+  }
 
-        VStack(alignment: .leading, spacing: 15) {
-          HStack {
-            Text("오늘의 추천 종목")
+  // MARK: - View Components
+
+  private var contentView: some View {
+    VStack(alignment: .leading, spacing: 30) {
+      VStack(alignment: .leading, spacing: 10) {
+        HStack {
+          VStack(alignment: .leading) {
+            Text("안녕하세요")
               .font(.title2)
               .fontWeight(.bold)
-
-            Spacer()
+            Text("\(userName)님!")
+              .font(.title2)
+              .fontWeight(.bold)
           }
 
-          VStack(spacing: 10) {
-            ForEach(viewModel.stocks.indices, id: \.self) { index in
+          Spacer()
+        }
+      }
+
+      VStack(alignment: .leading, spacing: 15) {
+        HStack {
+          Text("오늘의 추천 종목")
+            .font(.title2)
+            .fontWeight(.bold)
+
+          Spacer()
+        }
+
+        VStack(spacing: 10) {
+          ForEach(viewModel.stocks.indices, id: \.self) { index in
+            NavigationLink(destination: StockDetailView(stockName: viewModel.stocks[index].name)) {
               HStack {
                 Text(viewModel.stocks[index].name)
                   .font(.body)
@@ -75,86 +104,76 @@ struct MainView: View {
               .background(Color(.systemGray6))
               .cornerRadius(10)
             }
+            .buttonStyle(PlainButtonStyle())
           }
         }
+      }
 
-        VStack(alignment: .leading, spacing: 15) {
-          HStack {
-            Text("소비 통계")
-              .font(.title2)
-              .fontWeight(.bold)
+      VStack(alignment: .leading, spacing: 15) {
+        HStack {
+          Text("소비 통계")
+            .font(.title2)
+            .fontWeight(.bold)
 
-            Spacer()
-          }
+          Spacer()
+        }
 
-          HStack {
-            Spacer()
+        HStack {
+          Spacer()
 
-            VStack {
-              ZStack {
-                let total = viewModel.expenseData.reduce(0) { $0 + $1.percentage }
+          VStack {
+            ZStack {
+              let total = viewModel.expenseData.reduce(0) { $0 + $1.percentage }
 
-                ForEach(viewModel.expenseData.indices, id: \.self) { index in
-                  let startAngle = viewModel.expenseData.prefix(index).reduce(0) { $0 + $1.percentage } / total
-                  let endAngle = viewModel.expenseData.prefix(index + 1).reduce(0) { $0 + $1.percentage } / total
-
-                  Circle()
-                    .trim(from: startAngle, to: endAngle)
-                    .stroke(viewModel.expenseData[index].color, lineWidth: 25)
-                    .frame(width: 150, height: 150)
-                    .rotationEffect(.degrees(-90))
-                }
+              ForEach(viewModel.expenseData.indices, id: \.self) { index in
+                let startAngle = viewModel.expenseData.prefix(index).reduce(0) { $0 + $1.percentage } / total
+                let endAngle = viewModel.expenseData.prefix(index + 1).reduce(0) { $0 + $1.percentage } / total
 
                 Circle()
-                  .fill(Color(.systemBackground))
-                  .frame(width: 80, height: 80)
+                  .trim(from: startAngle, to: endAngle)
+                  .stroke(viewModel.expenseData[index].color, lineWidth: 25)
+                  .frame(width: 150, height: 150)
+                  .rotationEffect(.degrees(-90))
               }
-              .padding(.bottom, 20)
 
-              VStack(alignment: .leading, spacing: 8) {
-                ForEach(viewModel.expenseData.indices, id: \.self) { index in
-                  HStack {
-                    Circle()
-                      .fill(viewModel.expenseData[index].color)
-                      .frame(width: 12, height: 12)
+              Circle()
+                .fill(Color(.systemBackground))
+                .frame(width: 80, height: 80)
+            }
+            .padding(.bottom, 20)
 
-                    Text(viewModel.expenseData[index].name)
-                      .font(.caption)
-                      .foregroundColor(.secondary)
+            VStack(alignment: .leading, spacing: 8) {
+              ForEach(viewModel.expenseData.indices, id: \.self) { index in
+                HStack {
+                  Circle()
+                    .fill(viewModel.expenseData[index].color)
+                    .frame(width: 12, height: 12)
 
-                    Spacer()
+                  Text(viewModel.expenseData[index].name)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
 
-                    Text("\(Int(viewModel.expenseData[index].percentage))%")
-                      .font(.caption)
-                      .foregroundColor(.secondary)
-                  }
+                  Spacer()
+
+                  Text("\(Int(viewModel.expenseData[index].percentage))%")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 }
               }
             }
-            Spacer()
           }
+          Spacer()
         }
       }
-      .padding()
     }
-    .onAppear {
-      viewModel.loadData()
+    .padding()
+  }
+
+  private var loadingView: some View {
+    VStack(spacing: 20) {
+      ProgressView()
+        .scaleEffect(1.5)
     }
-    .overlay {
-      if viewModel.isLoading {
-        ProgressView("Loading...")
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .background(Color.black.opacity(0.1))
-      }
-    }
-    .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-      Button("OK") {
-        viewModel.errorMessage = nil
-      }
-    } message: {
-      if let errorMessage = viewModel.errorMessage {
-        Text(errorMessage)
-      }
-    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
