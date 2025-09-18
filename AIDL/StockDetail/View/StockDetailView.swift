@@ -6,12 +6,13 @@ struct StockDetailView: View {
   let stockInfo = StockInfo(
     name: "종목명",
     currentPrice: 17350,
-    previousPrice: 17870
+    fluctuationRate: -2.91,
+    vsAmount: -520
   )
 
   let consumerScore = ConsumerMatchingScore(
     score: 95,
-    content: "GPT스타일 소비 생활과 반영하다는 내용 등과 같이"
+    reason: "GPT스타일 소비 생활과 반영하다는 내용 등과 같이"
   )
 
   let aiBriefing = AIBriefing(
@@ -19,12 +20,14 @@ struct StockDetailView: View {
     briefingContent: "AI가 분석한 종목 브리핑 내용",
     newsList: [
       NewsItem(
-        date: "2025.08.28 Yahoo News",
-        content: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기"
+        link: "https://example.com/news1",
+        summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
+        date: "2025.08.28 Yahoo News"
       ),
       NewsItem(
-        date: "2025.08.27 Y News",
-        content: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기"
+        link: "https://example.com/news2",
+        summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
+        date: "2025.08.27 Y News"
       ),
     ]
   )

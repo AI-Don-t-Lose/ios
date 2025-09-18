@@ -49,6 +49,7 @@ struct StockPriceView: View {
   StockPriceView(stockInfo: StockInfo(
     name: "종목명",
     currentPrice: 17350,
-    previousPrice: 17870
+    fluctuationRate: -2.91,
+    vsAmount: -520
   ))
 }

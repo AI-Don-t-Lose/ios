@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  MainView.swift
 //  AIDL
 //
 //  Created by Jinyoung Kim on 9/12/25.

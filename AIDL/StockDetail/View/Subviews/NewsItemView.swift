@@ -12,7 +12,7 @@ struct NewsItemView: View {
         .fontWeight(.medium)
         .foregroundColor(.primary)
 
-      Text(newsItem.content)
+      Text(newsItem.summary)
         .font(.caption)
         .foregroundColor(.secondary)
         .lineLimit(2)
@@ -44,12 +44,14 @@ struct NewsListView: View {
 #Preview {
   NewsListView(newsList: [
     NewsItem(
-      date: "2025.08.28 Yahoo News",
-      content: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기"
+      link: "https://example.com/news1",
+      summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
+      date: "2025.08.28 Yahoo News"
     ),
     NewsItem(
-      date: "2025.08.27 Y News",
-      content: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기"
+      link: "https://example.com/news2",
+      summary: "뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기 뉴스 내용 미리보기",
+      date: "2025.08.27 Y News"
     ),
   ])
 }

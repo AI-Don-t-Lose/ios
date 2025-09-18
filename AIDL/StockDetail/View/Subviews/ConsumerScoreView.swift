@@ -21,7 +21,7 @@ struct ConsumerScoreView: View {
         Spacer()
       }
 
-      Text(score.content)
+      Text(score.reason)
         .font(.caption)
         .foregroundColor(.secondary)
         .padding(.horizontal, 20)
@@ -32,6 +32,6 @@ struct ConsumerScoreView: View {
 #Preview {
   ConsumerScoreView(score: ConsumerMatchingScore(
     score: 95,
-    content: "GPT스타일 소비 생활과 반영하다는 내용 등과 같이"
+    reason: "GPT스타일 소비 생활과 반영하다는 내용 등과 같이"
   ))
 }
