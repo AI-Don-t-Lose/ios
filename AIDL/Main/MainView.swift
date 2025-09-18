@@ -108,6 +108,8 @@ struct MainView: View {
           }
         }
       }
+      .padding()
+      .glassEffect()
 
       VStack(alignment: .leading, spacing: 15) {
         HStack {
@@ -137,7 +139,7 @@ struct MainView: View {
               }
 
               Circle()
-                .fill(Color(.systemBackground))
+                .fill(Color(.clear))
                 .frame(width: 80, height: 80)
             }
             .padding(.bottom, 20)
@@ -165,6 +167,8 @@ struct MainView: View {
           Spacer()
         }
       }
+      .padding()
+      .glassEffect()
     }
     .padding()
   }

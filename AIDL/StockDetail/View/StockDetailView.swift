@@ -17,7 +17,9 @@ struct StockDetailView: View {
                 let consumerScore = viewModel.consumerScore,
                 let aiBriefing = viewModel.aiBriefing
       {
-        contentView(stockInfo: stockInfo, consumerScore: consumerScore, aiBriefing: aiBriefing)
+        ScrollView {
+          contentView(stockInfo: stockInfo, consumerScore: consumerScore, aiBriefing: aiBriefing)
+        }
       } else {
         dataIncompleteView
       }

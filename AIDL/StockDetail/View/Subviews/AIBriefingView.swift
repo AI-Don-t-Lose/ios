@@ -10,11 +10,12 @@ struct AIBriefingView: View {
       Text("AI 종목 브리핑")
         .font(.title3)
         .fontWeight(.semibold)
+        .foregroundColor(.primary)
         .padding(.horizontal, 20)
 
       Text(briefing.baseDate)
         .font(.caption)
-        .foregroundColor(.secondary)
+        .foregroundColor(.primary)
         .padding(.horizontal, 20)
 
       // AI 분석 박스
