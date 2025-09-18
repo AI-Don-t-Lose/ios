@@ -5,7 +5,7 @@ import SwiftUI
 struct ContentView: View {
   var body: some View {
     NavigationView {
-      StockDetailView()
+      StockDetailView(stockName: "넷마블")
         .navigationBarHidden(true)
     }
   }

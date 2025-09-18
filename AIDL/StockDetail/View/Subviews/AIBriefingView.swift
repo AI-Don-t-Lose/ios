@@ -18,15 +18,9 @@ struct AIBriefingView: View {
         .padding(.horizontal, 20)
 
       // AI 분석 박스
-      Rectangle()
-        .fill(Color(.systemGray5))
-        .frame(height: 120)
-        .overlay(
-          Text(briefing.briefingContent)
-            .font(.body)
-            .foregroundColor(.secondary)
-        )
-        .cornerRadius(8)
+      Text(briefing.briefingContent)
+        .font(.subheadline)
+        .foregroundColor(.secondary)
         .padding(.horizontal, 20)
 
       // 뉴스 섹션
