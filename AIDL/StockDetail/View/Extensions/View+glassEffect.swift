@@ -31,11 +31,13 @@ struct GlassModifier: ViewModifier {
               lineWidth: 1.7,
             )
         }
+        .allowsHitTesting(false)
       )
       .background(
         RoundedRectangle(cornerRadius: cornerRadius)
           .fill(Color.white)
           .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.15), radius: 15)
+          .allowsHitTesting(false)
       )
   }
 }

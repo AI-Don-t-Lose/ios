@@ -14,30 +14,30 @@ struct MainView: View {
   @StateObject private var viewModel = MainViewModel()
 
   var body: some View {
-    NavigationStack {
-      VStack {
-        if viewModel.isLoading {
-          loadingView
-        } else {
+    VStack {
+      if viewModel.isLoading {
+        loadingView
+      } else {
+        NavigationStack {
           ScrollView {
             contentView
           }
         }
-      }
-      .onAppear {
-        viewModel.loadData()
-      }
-      .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-        Button("OK") {
-          viewModel.errorMessage = nil
-        }
-      } message: {
-        if let errorMessage = viewModel.errorMessage {
-          Text(errorMessage)
-        }
+        .tint(.black)
       }
     }
-    .tint(.black)
+    .onAppear {
+      viewModel.loadData()
+    }
+    .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+      Button("OK") {
+        viewModel.errorMessage = nil
+      }
+    } message: {
+      if let errorMessage = viewModel.errorMessage {
+        Text(errorMessage)
+      }
+    }
   }
 
   // MARK: - View Components
@@ -70,7 +70,9 @@ struct MainView: View {
 
         VStack(spacing: 10) {
           ForEach(viewModel.stocks.indices, id: \.self) { index in
-            NavigationLink(destination: StockDetailView(stockName: viewModel.stocks[index].name)) {
+            NavigationLink {
+              StockDetailView(stockName: viewModel.stocks[index].name)
+            } label: {
               HStack {
                 Text(viewModel.stocks[index].name)
                   .font(.body)
@@ -104,7 +106,6 @@ struct MainView: View {
               .background(Color(.systemGray6))
               .cornerRadius(10)
             }
-            .buttonStyle(PlainButtonStyle())
           }
         }
       }
