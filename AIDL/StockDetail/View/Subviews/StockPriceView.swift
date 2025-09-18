@@ -20,7 +20,7 @@ struct StockPriceView: View {
             .font(.caption)
             .foregroundColor(stockInfo.isPositive ? .red : .blue)
 
-          Text(formatPrice(abs(stockInfo.priceChange)))
+          Text(formatPrice(stockInfo.priceChange))
             .font(.body)
             .foregroundColor(stockInfo.isPositive ? .red : .blue)
         }
@@ -28,7 +28,7 @@ struct StockPriceView: View {
         Spacer()
 
         // 등락 퍼센트
-        Text(String(format: "%.2f%%", abs(stockInfo.priceChangePercent)))
+        Text(String(format: "%.2f%%", stockInfo.priceChangePercent))
           .font(.title)
           .fontWeight(.bold)
           .foregroundColor(stockInfo.isPositive ? .red : .blue)
@@ -41,6 +41,7 @@ struct StockPriceView: View {
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal
     formatter.maximumFractionDigits = 0
+    formatter.negativePrefix = "-"
     return formatter.string(from: NSNumber(value: price)) ?? "\(Int(price))"
   }
 }
