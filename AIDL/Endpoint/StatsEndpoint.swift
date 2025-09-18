@@ -22,8 +22,8 @@ struct StatsEndpoint: HTTPEndpoint {
 
   struct Query: Encodable {}
 
-  let url: URL = .init(string: "\(Environment.baseURL)/stats")!
-  let path: String = ""
+  let url: URL = Environment.baseURL
+  let path: String = "/stats"
   let method: HTTPMethod = .get
   var headers: Header? {
     return ["Authorization": "Bearer \(Environment.apiToken)"]

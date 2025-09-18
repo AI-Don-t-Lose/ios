@@ -45,7 +45,13 @@ class NetworkClient {
     print("👀 NetworkClient --start")
     do {
       if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-        print(dict)
+        // 한글이 제대로 표시되도록 JSON을 다시 인코딩하여 출력
+        let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted, .sortedKeys])
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+          print(jsonString)
+        } else {
+          print(dict)
+        }
       }
     } catch {
       print("Failed to decode JSON:", error)

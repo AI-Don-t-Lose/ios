@@ -19,9 +19,11 @@ struct PriceEndpoint: HTTPEndpoint {
         let fluctuationRate: Double
         let vsAmount: Double
       }
+
       let price: Price
       let name: String
     }
+
     let data: Data
     let message: String
   }
@@ -29,7 +31,7 @@ struct PriceEndpoint: HTTPEndpoint {
   struct Query: Encodable {}
 
   let stockName: String
-  
+
   let url: URL = Environment.baseURL
   var path: String { "/stock/price/\(stockName)" }
   let method: HTTPMethod = .get
@@ -39,7 +41,7 @@ struct PriceEndpoint: HTTPEndpoint {
 
   let query: Query? = .init()
   let body: Data? = nil
-  
+
   init(stockName: String) {
     self.stockName = stockName
   }
